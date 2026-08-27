@@ -80,7 +80,10 @@ def test_xor(a, b, expected):
     [
         pytest.param(
             bytes([i for i in range(16)]), 64, "08090a0b 0c0d0e0f 00010203 04050607"
-        )
+        ),
+        pytest.param(
+            bytes([i for i in range(16)]), 32, "04050607 08090a0b 0c0d0e0f 00010203"
+        ),
     ],
 )
 def test_rot(a, r, expected):
