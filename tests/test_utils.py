@@ -1,6 +1,6 @@
 import pytest
 
-from tests import IN1, a2b, b2a, xor
+from tests import IN1, a2b, b2a, rot, xor
 
 
 @pytest.mark.parametrize(
@@ -73,3 +73,15 @@ def test_IN1_concatination(sqn, amf, expected_in1):
 )
 def test_xor(a, b, expected):
     assert b2a(xor(a2b(a), a2b(b))) == expected
+
+
+@pytest.mark.parametrize(
+    "a, r, expected",
+    [
+        pytest.param(
+            bytes([i for i in range(16)]), 64, "08090a0b 0c0d0e0f 00010203 04050607"
+        )
+    ],
+)
+def test_rot(a, r, expected):
+    assert b2a(rot(a, r)) == expected

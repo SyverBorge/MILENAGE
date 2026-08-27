@@ -1,4 +1,4 @@
-version = 1
+Have made unit test for the xor function. It seams to work!!!:-)version = 1
 revision = 3
 requires-python = ">=3.13"
 

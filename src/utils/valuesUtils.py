@@ -19,3 +19,12 @@ def xor(a, b: bytes) -> bytes:
         result[i] = a[i] ^ b[i]
 
     return bytes(result)
+
+
+def rot(a: bytes, r) -> bytes:
+    r_num = r // 8
+    top = a[0:r_num]
+    end = a[r_num:]
+
+    rotated = end + top
+    return rotated
