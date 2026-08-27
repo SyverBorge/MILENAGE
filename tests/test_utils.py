@@ -1,6 +1,6 @@
 import pytest
 
-from tests import IN1, a2b, b2a, rot, xor
+from tests import IN1, a2b, b2a, rot, set_bits, xor
 
 
 @pytest.mark.parametrize(
@@ -88,3 +88,18 @@ def test_xor(a, b, expected):
 )
 def test_rot(a, r, expected):
     assert b2a(rot(a, r)) == expected
+
+
+@pytest.mark.parametrize(
+    "byte, bits, expected",
+    [
+        pytest.param(
+            bytearray(16),
+            0b00000001,
+            "00000000 00000000 00000000 00000001",
+            id="bytes0_bits1",
+        )
+    ],
+)
+def test_setbits(byte, bits, expected):
+    assert b2a(bytes(set_bits(byte, bits))) == expected

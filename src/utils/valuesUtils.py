@@ -28,3 +28,9 @@ def rot(a: bytes, r) -> bytes:
 
     rotated = end + top
     return rotated
+
+
+def set_bits(b: bytearray, bits) -> bytearray:
+    c = b
+    c[-1] = bits
+    return c
