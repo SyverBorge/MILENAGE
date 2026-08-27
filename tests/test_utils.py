@@ -1,6 +1,6 @@
 import pytest
 
-from tests import IN1, a2b, b2a
+from tests import IN1, a2b, b2a, xor
 
 
 @pytest.mark.parametrize(
@@ -52,7 +52,24 @@ def test_b2a_empty_raises():
             "ff9bb4d0 b607b9b9 ff9bb4d0 b607b9b9",
             id="sqn1_amf1",
         ),
+        pytest.param(
+            "00000000 0001",
+            "0001",
+            "00000000 00010001 00000000 00010001",
+            id="sqn2_amf2",
+        ),
     ],
 )
 def test_IN1_concatination(sqn, amf, expected_in1):
     assert b2a(IN1(sqn, amf)) == expected_in1
+
+
+@pytest.mark.parametrize(
+    "a, b, expected",
+    [
+        pytest.param("0101", "1010", "1111", id="a1_b1"),
+        pytest.param("00001111", "11110000", "11111111"),
+    ],
+)
+def test_xor(a, b, expected):
+    assert b2a(xor(a2b(a), a2b(b))) == expected
