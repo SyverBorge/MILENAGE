@@ -7,3 +7,15 @@ def IN1(sqn: str, amf: str) -> bytes:
 
     in1 = SQN + AMF + SQN + AMF
     return in1
+
+def xor(a, b: bytes) -> bytes:
+    assert len(a) == len(b),
+    assert len(a) > 0,
+
+    result = bytearray(len(a))
+
+    for i in range(len(result)):
+        result[i] = a[i] ^ b[i]
+
+    return bytes(result)
+
