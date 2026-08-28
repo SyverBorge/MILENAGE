@@ -1,4 +1,6 @@
-from milenage import IN1, E, const, rot, xor
+from src.milenage import constants as const
+from src.utils.CrytoUtils import E
+from src.utils.valuesUtils import IN1, rot, xor
 
 
 def f1(k: bytes, rand: bytes, sqn: bytes, amf: bytes, opc: bytes) -> bytes:

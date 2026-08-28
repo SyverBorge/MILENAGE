@@ -1,4 +1,4 @@
-from src.milenage import set_bits
+from src.utils.valuesUtils import set_bits
 
 # Rotating constants
 R1 = 64
