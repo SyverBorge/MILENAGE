@@ -30,7 +30,7 @@ def test_a2b_odd_length_raises():
             bytes.fromhex("00112233445566778899aabbccddeeff"),
             "00112233 44556677 8899aabb ccddeeff",
         ),
-        (bytes.fromhex("0011223344556677"), "0011223344556677"),
+        (bytes.fromhex("0011223344556677"), "00112233 44556677"),
         (bytes([0xAB]), "ab"),
     ],
 )
