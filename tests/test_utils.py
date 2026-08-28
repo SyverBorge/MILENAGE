@@ -1,6 +1,6 @@
 import pytest
 
-from tests import IN1, E, a2b, b2a, rot, set_bits, xor
+from tests import IN1, OPC, E, a2b, b2a, const, rot, set_bits, xor
 
 
 @pytest.mark.parametrize(
@@ -61,7 +61,7 @@ def test_b2a_empty_raises():
     ],
 )
 def test_IN1_concatination(sqn, amf, expected_in1):
-    assert b2a(IN1(sqn, amf)) == expected_in1
+    assert b2a(IN1(a2b(sqn), a2b(amf))) == expected_in1
 
 
 @pytest.mark.parametrize(
@@ -79,10 +79,14 @@ def test_xor(a, b, expected):
     "a, r, expected",
     [
         pytest.param(
-            bytes([i for i in range(16)]), 64, "08090a0b 0c0d0e0f 00010203 04050607"
+            bytes([i for i in range(16)]),
+            const.R1,
+            "08090a0b 0c0d0e0f 00010203 04050607",
         ),
         pytest.param(
-            bytes([i for i in range(16)]), 32, "04050607 08090a0b 0c0d0e0f 00010203"
+            bytes([i for i in range(16)]),
+            const.R3,
+            "04050607 08090a0b 0c0d0e0f 00010203",
         ),
     ],
 )
@@ -118,3 +122,18 @@ def test_setbits(byte, bits, expected):
 )
 def test_E(k, m, xc):
     assert E(a2b(k), a2b(m)) == a2b(xc)
+
+
+@pytest.mark.parametrize(
+    "op, k, opc",
+    [
+        pytest.param(
+            "cdc202d5 123e20f6 2b6d676a c72cb318",
+            "465b5ce8 b199b49f aa5f0a2e e238a6bc",
+            "cd63cb71 954a9f4e 48a5994e 37a02baf",
+            id="op1k1opc1",
+        )
+    ],
+)
+def test_OPC(op, k, opc):
+    assert b2a(OPC(a2b(op), a2b(k))) == opc
