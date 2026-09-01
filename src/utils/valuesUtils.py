@@ -1,11 +1,9 @@
+from src.utils.CrytoUtils import E
 from src.utils.PrintoutUtils import a2b
 
 
-def IN1(sqn: str, amf: str) -> bytes:
-    SQN = a2b(sqn)
-    AMF = a2b(amf)
-
-    in1 = SQN + AMF + SQN + AMF
+def IN1(sqn: bytes, amf: bytes) -> bytes:
+    in1 = sqn + amf + sqn + amf
     return in1
 
 
@@ -34,3 +32,10 @@ def set_bits(b: bytearray, bits) -> bytearray:
     c = b
     c[-1] = bits
     return c
+
+
+def OPC(op, k):
+    op_E = E(k, op)
+    opc = xor(op_E, op)
+
+    return opc

@@ -23,6 +23,9 @@ def b2a(b: bytes) -> str:
             hexstr[0:8] + " " + hexstr[8:16] + " " + hexstr[16:24] + " " + hexstr[24:]
         )
 
+    if len(hexstr) == 16:
+        hexstr = hexstr[0:8] + " " + hexstr[8:16]
+
     else:
         hs = ""
         while len(hexstr) >= 8:
