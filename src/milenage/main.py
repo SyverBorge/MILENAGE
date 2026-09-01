@@ -5,6 +5,8 @@ from src.milenage.milenage import *
 from src.utils.PrintoutUtils import *
 from src.utils.valuesUtils import *
 
+PROJECT_ROOT = Path(__file__).resolve().parents[2]
+
 
 def parse_test_vectors(path: str | Path):
     text = Path(path).read_text(encoding="utf-8")
@@ -32,7 +34,8 @@ def parse_test_vectors(path: str | Path):
 
 
 def main():
-    path = "/Users/syverborgesaksvik/Documents/USN-fag/Obliger/MILENAGE/TS35208_CONFORMANCE_TEST_DATA_pure.TEXT"
+    path = PROJECT_ROOT / "TS35208_CONFORMANCE_TEST_DATA_pure.TEXT"
+    path2 = PROJECT_ROOT / "EXTRA_TESTS-1.text"
     test_data = parse_test_vectors(path)
 
     for dataset in test_data:
@@ -63,9 +66,6 @@ def main():
 
     print(f"OPc, f1, f1*, f2, f3, f4, f5 and f5* verified for test sets")
 
-    path2 = (
-        "/Users/syverborgesaksvik/Documents/USN-fag/Obliger/MILENAGE/EXTRA_TESTS-1.text"
-    )
     test_data_extra = parse_test_vectors(path2)
 
     for dataset in test_data_extra:
